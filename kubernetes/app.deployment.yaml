@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: k8s-symfony
-        image: 121996518446.dkr.ecr.eu-west-2.amazonaws.com/k8s-symfony:1.0.6
+        image: xxx.dkr.ecr.eu-west-2.amazonaws.com/xxx:1.0.6
         ports:
         - containerPort: 80

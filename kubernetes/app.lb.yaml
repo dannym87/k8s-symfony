@@ -5,7 +5,7 @@ metadata:
   labels:
     app: k8s-symfony
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-west-2:121996518446:certificate/b222e330-ceb0-4f1c-a206-e8046d6cc1bd"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-west-2:xxx:certificate/xxx"
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
 spec:
