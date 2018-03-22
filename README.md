@@ -2,6 +2,8 @@
 
 This project is merely a test app for my own personal use for getting a kubernetes cluster running a Symfony app on AWS.
 
+More detailed instructions can be found at [https://aws.amazon.com/blogs/compute/kubernetes-clusters-aws-kops/](https://aws.amazon.com/blogs/compute/kubernetes-clusters-aws-kops/)
+
 ## AWS
 
 Configure the AWS cli with your credentials
