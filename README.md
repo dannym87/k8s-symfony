@@ -55,8 +55,7 @@ kubectl get nodes
 ## Build, tag & push the Docker image
 
 ```
-docker build -t k8s-symfony .
-docker tag k8s-symfony:latest xxx.dkr.ecr.eu-west-2.amazonaws.com/k8s-symfony:1.0.0
+docker build -t xxx.dkr.ecr.eu-west-2.amazonaws.com/k8s-symfony:1.0.0 .
 docker push xxx.dkr.ecr.eu-west-2.amazonaws.com/k8s-symfony:1.0.0
 ```
 
