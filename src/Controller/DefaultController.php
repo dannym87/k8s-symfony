@@ -15,7 +15,13 @@ class DefaultController extends Controller
     public function index(): Response
     {
         $response = new Response();
-        $response->setContent('<h1>Hello from Kubernetes running on AWS!</h1>');
+        $hostname = gethostname();
+        $html = <<<HTML
+<h1>Hello from Kubernetes running on AWS</h1>
+<p>Container: {$hostname}</p>
+HTML;
+
+        $response->setContent($html);
 
         return $response;
     }

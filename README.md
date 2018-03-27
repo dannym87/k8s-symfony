@@ -82,6 +82,28 @@ kubectl scale --replicas 4 -f kubernetes/app.deployment.yaml
 
 todo: Check if there's a way for Kubernetes to automatically assign an ALIAS for the ELB to the Route53 DNS records
 
+## Create cluster user
+
+[https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/](https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/)
+
+Firstly, download CA key and cert created by kops from the s3 bucket
+
+```
+$BUCKET/pki/private/ca/xxx.key
+$BUCKET/pki/issued/ca/xxx.crt
+```
+
+Create the user and grant access to the cluster (on all namespaces)
+
+```
+openssl genrsa -out jenkins.key 2048
+openssl req -new -key jenkins.key -out jenkins.csr -subj "/CN=jenkins/O=digital-elements"
+openssl x509 -req -in jenkins.csr -CA /tmp/ca.crt -CAkey /tmp/ca.key -CAcreateserial -out jenkins.crt -days 500
+kubectl config set-credentials jenkins --client-certificate=jenkins.crt  --client-key=jenkins.key
+kubectl config set-context testing.digital-elements.co.uk/jenkins --cluster=testing.digital-elements.co.uk --user=jenkins
+kubectl config use-context testing.digital-elements.co.uk/jenkins
+```
+
 ## Tear down the cluster
 
 Completely remove the Kubernetes cluster

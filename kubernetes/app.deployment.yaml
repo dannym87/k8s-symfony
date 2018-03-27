@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: k8s-symfony-deployment
@@ -6,16 +6,31 @@ spec:
   selector:
     matchLabels:
       app: k8s-symfony
-  replicas: 2 # tells deployment to run 2 pods matching the template
-  template: # create pods using pod definition in this template
+  replicas: 2
+  template:
     metadata:
-      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
-      # generated from the deployment name
       labels:
         app: k8s-symfony
     spec:
       containers:
-      - name: k8s-symfony
-        image: xxx.dkr.ecr.eu-west-2.amazonaws.com/xxx:1.0.6
-        ports:
-        - containerPort: 80
+        - name: k8s-symfony
+          image: xxx.dkr.ecr.eu-west-2.amazonaws.com/xxx:1.0.0
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_ENV
+              value: prod
+          readinessProbe:
+            httpGet:
+              path: /_/health
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /_/health
+              port: 80
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+            periodSeconds: 15
